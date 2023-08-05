@@ -1,0 +1,16 @@
+Teck stack
+1. spring boot
+2. mysql
+3. spring security
+4. jwt
+5. postman
+6. hibernate
+7. aws
+8. swagger
+
+Dependencies spring boot
+1. spring web
+2. spring jpa
+3. mysql driver
+4. lombok
+5. dev tool

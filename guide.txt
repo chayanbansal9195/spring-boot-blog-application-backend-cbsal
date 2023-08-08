@@ -14,6 +14,8 @@ Dependencies spring boot
 3. mysql driver
 4. lombok
 5. dev tool
+6. modelmapper
+7. hibernate springboot validation
 
 mysql config
 1. schema name - blog_app_apis

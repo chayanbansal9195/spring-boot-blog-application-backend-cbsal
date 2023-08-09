@@ -21,7 +21,7 @@ import com.backend.blog.cbsal.services.UserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/users/v1")
+@RequestMapping("api/user/v1")
 public class UserController {
 
 	@Autowired
@@ -39,7 +39,8 @@ public class UserController {
 	// PUT - update user
 
 	@PutMapping("/update/{userId}")
-	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer userId) {
+	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,
+			@PathVariable("userId") Integer userId) {
 
 		UserDto updatedUserDto = this.userService.updateUser(userDto, userId);
 
@@ -49,21 +50,22 @@ public class UserController {
 	// DELETE - delete user
 
 	@DeleteMapping("/delete/{userId}")
-	public ResponseEntity<?> deleteUser(@PathVariable("userId") Integer userId) {
+	public ResponseEntity<ApiResponse> deleteUser(@PathVariable("userId") Integer userId) {
+
 		this.userService.deleteUser(userId);
-		return new ResponseEntity<>(new ApiResponse("User deleted successfully", true), HttpStatus.OK);
+		return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted successfully", true), HttpStatus.OK);
 	}
 
 	// GET - All user get
 
-	@GetMapping("/users")
+	@GetMapping("/getAll")
 	public ResponseEntity<List<UserDto>> getAllUsers() {
 		return new ResponseEntity<List<UserDto>>(this.userService.getAllUsers(), HttpStatus.OK);
 	}
 
 	// GET - single user get
 
-	@GetMapping("/users/{userId}")
+	@GetMapping("/get/{userId}")
 	public ResponseEntity<UserDto> getSingleUser(@PathVariable("userId") Integer userId) {
 		return new ResponseEntity<UserDto>(this.userService.getUserById(userId), HttpStatus.OK);
 	}

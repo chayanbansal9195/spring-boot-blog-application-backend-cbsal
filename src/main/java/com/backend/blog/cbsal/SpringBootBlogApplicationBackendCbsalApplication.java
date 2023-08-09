@@ -11,5 +11,4 @@ public class SpringBootBlogApplicationBackendCbsalApplication {
 		SpringApplication.run(SpringBootBlogApplicationBackendCbsalApplication.class, args);
 	}
 	
-	
 }

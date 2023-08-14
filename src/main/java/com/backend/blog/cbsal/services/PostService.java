@@ -3,6 +3,7 @@ package com.backend.blog.cbsal.services;
 import java.util.List;
 
 import com.backend.blog.cbsal.payloads.PostDto;
+import com.backend.blog.cbsal.payloads.PostResponse;
 
 public interface PostService {
 
@@ -19,7 +20,7 @@ public interface PostService {
 	PostDto getSinglePost(Integer postId);
 
 	// getall
-	List<PostDto> getAllPosts();
+	PostResponse getAllPosts(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
 
 	// get all post by category
 	List<PostDto> getAllPostByCategory(Integer categoryId);

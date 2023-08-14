@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.blog.cbsal.config.AppConstants;
 import com.backend.blog.cbsal.payloads.ApiResponse;
 import com.backend.blog.cbsal.payloads.PostDto;
+import com.backend.blog.cbsal.payloads.PostResponse;
 import com.backend.blog.cbsal.services.PostService;
 
 @RestController
@@ -63,11 +66,15 @@ public class PostController {
 
 	// get all posts
 	@GetMapping("/posts")
-	public ResponseEntity<List<PostDto>> getAllPosts() {
+	public ResponseEntity<PostResponse> getAllPosts(
+			@RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+			@RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+			@RequestParam(value = "sortDir", defaultValue = AppConstants.SORT_DIR, required = false) String sortDir) {
 
-		List<PostDto> getAllPostDto = this.postService.getAllPosts();
+		PostResponse postResponse = this.postService.getAllPosts(pageNumber, pageSize, sortBy, sortDir);
 
-		return new ResponseEntity<List<PostDto>>(getAllPostDto, HttpStatus.OK);
+		return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
 	}
 
 	// get by category
@@ -90,4 +97,10 @@ public class PostController {
 
 	}
 
+	// search
+	@GetMapping("/search/{keyword}")
+	public ResponseEntity<List<PostDto>> searchPostByTitle(@PathVariable("keyword") String keyword) {
+		List<PostDto> searchedPosts = this.postService.searchPosts(keyword);
+		return new ResponseEntity<List<PostDto>>(searchedPosts, HttpStatus.OK);
+	}
 }

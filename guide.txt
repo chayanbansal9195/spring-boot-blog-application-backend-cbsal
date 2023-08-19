@@ -16,6 +16,7 @@ Dependencies spring boot
 5. dev tool
 6. modelmapper
 7. hibernate springboot validation
+8. spring security
 
 mysql config
 1. schema name - blog_app_apis
